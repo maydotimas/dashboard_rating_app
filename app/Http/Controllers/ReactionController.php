@@ -13,9 +13,7 @@ class ReactionController extends Controller
 
         $data = [
             'event' => 'UserReacted',
-            'data' => [
-                'username' => 'Jeff way'
-            ]
+            'data' => $request->all()
         ];
 
         Redis::publish('test-channel', json_encode($data));
