@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container" id="app">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
@@ -20,4 +20,27 @@
         </div>
     </div>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+<script>
+    var socket = io('http://localhost:3000');
+
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                users: [
+
+                ]
+            }
+        },
+        mounted: function (data) {
+            socket.on('test-channel:UserReacted', function (data) {
+                console.log(data);
+                alert('caught!');
+            });
+        }
+    })
+</script>
 @endsection

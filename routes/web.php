@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Redis;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,6 +14,7 @@
 */
 
 Route::get('/', function () {
+
     return view('welcome');
 });
 
