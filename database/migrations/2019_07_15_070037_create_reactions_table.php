@@ -13,7 +13,14 @@ class CreateReactionsTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('reactions', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('mobile_id');
+            $table->string('lat');
+            $table->string('long');
+            $table->enum('reaction',['VG','G','O','P','VP'])->unique();
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +30,6 @@ class CreateReactionsTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('reactions');
     }
 }
