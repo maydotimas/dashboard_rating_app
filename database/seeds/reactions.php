@@ -21,7 +21,7 @@ class reactions extends Seeder
                 'lat'     => $faker->numberBetween(1,1000),
                 'long'     => $faker->numberBetween(1,1000),
                 'reaction'    => $faker->randomElement(['VG','G','O','VP']),
-                'created_at' => $faker->dateTimeBetween('-1 years','+1 month'),
+                'created_at' => $faker->dateTimeBetween('-1 month','+1 month'),
             ]);
         }
         Reaction::insert($data);

@@ -13,6 +13,7 @@ class CreateReactionsTable extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('reactions');
         Schema::create('reactions', function (Blueprint $table) {
             $table->increments('id');
             $table->string('mobile_id');
