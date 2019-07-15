@@ -24,7 +24,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
 <script>
-    var socket = io(env('APP_URL_NODE', 'localhost:3000'));
+    var socket = io('http://touchpoint-nodejs.nexbridgetech.com');
 console.log(socket);
     new Vue({
         el: '#app',
