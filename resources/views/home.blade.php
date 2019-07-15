@@ -24,7 +24,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
 <script>
-    var socket = io('207.38.86.24:13159');
+    var socket = io('http://localhost:13159');
 console.log(socket);
     new Vue({
         el: '#app',
