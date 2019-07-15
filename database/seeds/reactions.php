@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Faker;
+use  Faker\Factory;
 use App\Reaction;
 
 class reactions extends Seeder
