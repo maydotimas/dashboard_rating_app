@@ -18,7 +18,7 @@ class CreateReactionsTable extends Migration
             $table->string('mobile_id');
             $table->string('lat');
             $table->string('long');
-            $table->enum('reaction',['VG','G','O','P','VP'])->unique();
+            $table->enum('reaction',['VG','G','O','P','VP']);
             $table->timestamps();
         });
     }
