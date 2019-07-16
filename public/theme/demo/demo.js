@@ -207,93 +207,17 @@ demo = {
                 labels: weekly_label,
                 datasets: [
                     {
-                        label: 'VG',
-                        borderColor: "#51BCDA",
-                        pointRadius: 1,
-                        pointHoverRadius: 1,
-                        borderWidth: 3,
-                        data: [weekly['VG']],
-                        fill: false,
-                    },
-                    {
-                        label: 'G',
-                        borderColor: "#6BD098",
-                        pointRadius: 1,
-                        pointHoverRadius: 1,
-                        borderWidth: 3,
-                        data: [weekly['G']],
-                        fill: false,
-                    },
-                    {
-                        label: 'O',
-                        borderColor: "#FBC658",
-                        pointRadius: 1,
-                        pointHoverRadius: 1,
-                        borderWidth: 3,
-                        data: [weekly['O']],
-                        fill: false,
-                    },
-                    {
-                        label: 'P',
-                        borderColor: "#EB7C08",
-                        pointRadius: 1,
-                        pointHoverRadius: 1,
-                        borderWidth: 3,
-                        data: [weekly['P']],
-                        fill: false,
-                    },
-                    {
-                        label: 'VP',
-                        borderColor: "#F4A359",
-                        pointRadius: 1,
-                        pointHoverRadius: 1,
-                        borderWidth: 3,
-                        data: [weekly['VP']],
-                        fill: false,
+                        label: "Monthly Reaction",
+                        backgroundColor: ["#51BCDA", "#6BD098","#FBC658","#EB7C08","#F4A359"],
+                        data: [weekly['VG'],weekly['G'],weekly['O'],weekly['P'],weekly['VP']]
                     }
-                ]
+                ],
             },
             options: {
-                legend: {
-                    display: true
-                },
-
-                tooltips: {
-                    enabled: true
-                },
-
-                scales: {
-                    yAxes: [{
-
-                        ticks: {
-                            fontColor: "#9f9f9f",
-                            beginAtZero: true,
-                            maxTicksLimit: 5,
-                            //padding: 20
-                        },
-                        gridLines: {
-                            drawBorder: true,
-                            zeroLineColor: "#ccc",
-                        }
-
-                    }],
-                    xAxes: [{
-                        barPercentage: 1.6,
-                        gridLines: {
-                            drawBorder: false,
-                            color: 'rgba(255,255,255,0.1)',
-                            zeroLineColor: "transparent",
-                            display: false,
-                        },
-                        ticks: {
-                            padding: 20,
-                            fontColor: "#9f9f9f"
-                        }
-                    }]
-                },
+                legend: { display: false },
                 title: {
                     display: true,
-                    text: title
+                    text: 'Monthly Reactions Summary Count'
                 }
             }
         });
