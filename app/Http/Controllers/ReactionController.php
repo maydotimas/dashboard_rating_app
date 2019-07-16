@@ -45,7 +45,7 @@ class ReactionController extends Controller
         $week = date('Y-m-d', strtotime('-7 day', strtotime(date('Y-m-d'))));
 
         $weekly = $this->get_reactions(true, $week, date('Y-m-d'));
-        $monthly = $this->get_reactions(true, date('Y-m-01'), date('Y-m-d'));
+        $monthly = $this->get_reactions(true, date('Y-m-01'), date('Y-m-d'),'monthly');
 
         return view('dashboard.index')
             ->withData($daily)
@@ -57,7 +57,7 @@ class ReactionController extends Controller
 
     }
 
-    public function get_reactions($is_between = false, $date_from = null, $date_to = null)
+    public function get_reactions($is_between = false, $date_from = null, $date_to = null, $mode = 'weekly')
     {
 
         if (!$is_between) {
@@ -85,24 +85,41 @@ class ReactionController extends Controller
                 ->groupBy('date_react', 'reaction')
                 ->get();
 
+            if ($mode == 'weekly') {
+                $data = [];
+                $react_date = [];
+                foreach ($reactions as $reaction) {
+                    $data['VG'][$reaction->date_react] = 0;
+                    $data['G'][$reaction->date_react] = 0;
+                    $data['O'][$reaction->date_react] = 0;
+                    $data['P'][$reaction->date_react] = 0;
+                    $data['VP'][$reaction->date_react] = 0;
+                }
 
-            $data = [];
-            $react_date = [];
-            foreach ($reactions as $reaction) {
-                $data['VG'][$reaction->date_react] = 0;
-                $data['G'][$reaction->date_react] = 0;
-                $data['O'][$reaction->date_react] = 0;
-                $data['P'][$reaction->date_react] = 0;
-                $data['VP'][$reaction->date_react] = 0;
+                foreach ($reactions as $reaction) {
+                    $data[$reaction->reaction][$reaction->date_react] = $reaction->reaction_count;
+                    $react_date[$reaction->date_react] = $reaction->date_react;
+                }
+            } else {
+                $data = [];
+                $data['VG'] = 0;
+                $data['G'] = 0;
+                $data['O'] = 0;
+                $data['P'] = 0;
+                $data['VP'] = 0;
+
+                $react_date = [];
+
+                foreach ($reactions as $reaction) {
+                    $data[$reaction->reaction] += $reaction->reaction_count;
+                }
             }
 
-            foreach ($reactions as $reaction) {
-                $data[$reaction->reaction][$reaction->date_react] = $reaction->reaction_count;
-                $react_date[$reaction->date_react] = $reaction->date_react;
-            }
+            return [$data, $react_date];
+
+
         }
 
-        return [$data, $react_date];
 
     }
 }

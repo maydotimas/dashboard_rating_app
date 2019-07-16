@@ -325,6 +325,7 @@ The above copyright notice and this permission notice shall be included in all c
 
                 <div class="col-md-1"></div>
             </div>
+
             <div class="row">
                 <div class="col-md-12">
                     <div class="card card-chart">
@@ -346,7 +347,7 @@ The above copyright notice and this permission notice shall be included in all c
                                 </div>
                             </div>
                             <canvas id="chartWeek" style="display: block; width: 441px; height: 220px;" width="441"
-                                    height="220" class="chartjs-render-monitor"></canvas>
+                                    height="200" class="chartjs-render-monitor"></canvas>
                             <hr>
                         </div>
                     </div>
@@ -370,7 +371,7 @@ The above copyright notice and this permission notice shall be included in all c
                                 </div>
                             </div>
                             <canvas id="chartMonth" style="display: block; width: 441px; height: 220px;" width="441"
-                                    height="220" class="chartjs-render-monitor"></canvas>
+                                    height="200" class="chartjs-render-monitor"></canvas>
                             <hr>
                             <div class="row">
 
@@ -426,108 +427,16 @@ The above copyright notice and this permission notice shall be included in all c
         var weekly = {!! json_encode($data_weekly) !!}
         var weekly_label = {!! json_encode($weekly) !!}
         var weekly_label = Object.keys(weekly_label);
-        console.log(weekly['G'])
-        var ctx = document.getElementById('chartWeek').getContext("2d");
+        var weekly_chart = "Weekly Reaction Statistics";
 
-        myChart = new Chart(ctx, {
-            type: 'line',
-
-            data: {
-                labels: weekly_label,
-                datasets: [
-                    {
-                        label: 'VG',
-                        borderColor: "#51BCDA",
-                        pointRadius: 1,
-                        pointHoverRadius: 1,
-                        borderWidth: 3,
-                        data: Object.values(weekly['VG']),
-                        fill: false,
-                    },
-                    {
-                        label: 'G',
-                        borderColor: "#6BD098",
-                        pointRadius: 1,
-                        pointHoverRadius: 1,
-                        borderWidth: 3,
-                        data: Object.values(weekly['G']),
-                        fill: false,
-                    },
-                    {
-                        label: 'O',
-                        borderColor: "#FBC658",
-                        pointRadius: 1,
-                        pointHoverRadius: 1,
-                        borderWidth: 3,
-                        data: Object.values(weekly['O']),
-                        fill: false,
-                    },
-                    {
-                        label: 'P',
-                        borderColor: "#EB7C08",
-                        pointRadius: 1,
-                        pointHoverRadius: 1,
-                        borderWidth: 3,
-                        data: Object.values(weekly['P']),
-                        fill: false,
-                    },
-                    {
-                        label: 'VP',
-                        borderColor: "#F4A359",
-                        pointRadius: 1,
-                        pointHoverRadius: 1,
-                        borderWidth: 3,
-                        data: Object.values(weekly['VP']),
-                        fill: false,
-                    }
-                ]
-            },
-            options: {
-                legend: {
-                    display: true
-                },
-
-                tooltips: {
-                    enabled: true
-                },
-
-                scales: {
-                    yAxes: [{
-
-                        ticks: {
-                            fontColor: "#9f9f9f",
-                            beginAtZero: true,
-                            maxTicksLimit: 5,
-                            //padding: 20
-                        },
-                        gridLines: {
-                            drawBorder: true,
-                            zeroLineColor: "#ccc",
-                        }
-
-                    }],
-
-                    xAxes: [{
-                        barPercentage: 1.6,
-                        gridLines: {
-                            drawBorder: false,
-                            color: 'rgba(255,255,255,0.1)',
-                            zeroLineColor: "transparent",
-                            display: false,
-                        },
-                        ticks: {
-                            padding: 20,
-                            fontColor: "#9f9f9f"
-                        }
-                    }]
-                },
-                title: {
-                    display: true,
-                    text: 'Weekly Reaction Statistics'
-                }
-            }
-        });
-
+        var monthly = {!! json_encode($data_monthly) !!}
+        var monthly_label = {!! json_encode($data_monthly) !!}
+        var monthly_label = Object.keys(monthly_label);
+        var monthly_chart = "Monthly Reaction Statistics";
+        console.log(monthly);
+        console.log(monthly_label);
+        demo.displayChartsWeeklyDashboard(weekly_label, weekly, weekly_chart,'chartWeek');
+        demo.displayChartsMonthlyDashboard(monthly_label, monthly, monthly_chart,'chartMonth');
 
     });
 </script>
