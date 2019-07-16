@@ -424,7 +424,8 @@ The above copyright notice and this permission notice shall be included in all c
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
 
 <script>
-    var socket = io.connect('http://touchpoint-nodejs.nexbridgetech.com');
+    io.set('origins', 'http://touchpoint-nodejs.nexbridgetech.com:13159');
+    var socket = io.connect('http://touchpoint-nodejs.nexbridgetech.com:13159');
     // console.log(socket);
     new Vue({
         el: '#app',
