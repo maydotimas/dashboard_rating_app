@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ApiStoreReactionRequest;
 use App\Reaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redis;
 
 class ReactionController extends Controller
@@ -14,9 +15,9 @@ class ReactionController extends Controller
        /* $data = [
             'event' => 'UserReacted',
             'data' => $request->all()
-        ];
+        ];*/
 
-        Redis::publish('test-channel', json_encode($data));*/
+        Redis::publish('test-channel', json_encode($data));
         /* end send data to redis */
 
         $reaction = new Reaction();
@@ -31,5 +32,23 @@ class ReactionController extends Controller
             'message'=>'Reaction has been submitted',
             'data'=>$reaction
         ]);
+    }
+
+    public function show_dashboard(){
+
+        $reactions = Reaction::where(DB::raw('date(created_at)'),date('Y-m-d'))
+            ->select(DB::raw('count(*) as reaction_count'),'reaction')
+            ->groupBy('reaction')
+            ->get();
+
+        $data = [];
+        $data['total'] = 0;
+        foreach($reactions as $reaction){
+            $data[$reaction->reaction] = $reaction->reaction_count;
+            $data['total'] += $reaction->reaction_count;
+        }
+
+        return view('dashboard.index')->withData($data);
+
     }
 }
