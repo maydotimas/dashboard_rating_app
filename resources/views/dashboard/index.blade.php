@@ -438,6 +438,10 @@ The above copyright notice and this permission notice shall be included in all c
      });*/
 
     $(document).ready(function () {
+
+        // display push.js message with you have # new reactions
+        Push.Permission.request();
+        
         /* Chart Data */
         var weekly =
                 {!! json_encode($data_weekly) !!}
@@ -466,7 +470,7 @@ The above copyright notice and this permission notice shall be included in all c
         }
 
 
-        function checkUpdate() {
+        async function checkUpdate() {
             // get the current value
             var vg = $("#hdn_VG").val();
             var g = $("#hdn_G").val();
@@ -485,7 +489,7 @@ The above copyright notice and this permission notice shall be included in all c
             var id = localStorage.getItem("id");
 
             // update the local storage last id viewed
-            $.get("/get-updates",
+            await $.get("/get-updates",
                 {
                     _id: id
                 }, function (data) {
@@ -602,8 +606,7 @@ The above copyright notice and this permission notice shall be included in all c
                         // get the last notifications last 1 hour and send the last id viewed
                         localStorage.setItem("id", data[1]);
 
-                        // display push.js message with you have # new reactions
-                        Push.Permission.request();
+
 
                     }
 
