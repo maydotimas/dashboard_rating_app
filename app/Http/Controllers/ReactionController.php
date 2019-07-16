@@ -12,10 +12,10 @@ class ReactionController extends Controller
 {
     public function api_store_reaction(ApiStoreReactionRequest $request){
         /* send data */
-       /* $data = [
+        $data = [
             'event' => 'UserReacted',
             'data' => $request->all()
-        ];*/
+        ];
 
         Redis::publish('test-channel', json_encode($data));
         /* end send data to redis */
