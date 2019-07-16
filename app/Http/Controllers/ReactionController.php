@@ -36,6 +36,7 @@ class ReactionController extends Controller
 
     public function show_dashboard(){
 
+        //daily reactions
         $reactions = Reaction::where(DB::raw('date(created_at)'),date('Y-m-d'))
             ->select(DB::raw('count(*) as reaction_count'),'reaction')
             ->groupBy('reaction')
@@ -48,7 +49,42 @@ class ReactionController extends Controller
             $data['total'] += $reaction->reaction_count;
         }
 
-        return view('dashboard.index')->withData($data);
+        // weekly reactions
+        $date = date('Y-m-d');
+        $newdate = strtotime ( '-7 day' , strtotime ( $date ) ) ;
+        $newdate = date ( 'Y-m-d' , $newdate );
+        $week = $newdate;
+
+        $reactions_weekly = Reaction::whereBetween(DB::raw('date(created_at)'),[$newdate,date('Y-m-d')])
+            ->select(DB::raw('count(*) as reaction_count'),'reaction')
+            ->groupBy('reaction')
+            ->get();
+
+        $data_weekly = [];
+        $data_weekly['total'] = 0;
+        foreach($reactions_weekly as $reaction){
+            $data_weekly[$reaction->reaction] = $reaction->reaction_count;
+            $data_weekly['total'] += $reaction->reaction_count;
+        }
+
+        //monthly reactions
+        $reactions_monthly = Reaction::whereBetween(DB::raw('date(created_at)'),[date('Y-m-01'),date('Y-m-d')])
+            ->select(DB::raw('count(*) as reaction_count'),'reaction')
+            ->groupBy('reaction')
+            ->get();
+
+        $data_monthly = [];
+        $data_monthly['total'] = 0;
+        foreach($reactions_monthly as $reaction){
+            $data_monthly[$reaction->reaction] = $reaction->reaction_count;
+            $data_monthly['total'] += $reaction->reaction_count;
+        }
+
+        return view('dashboard.index')
+            ->withData($data)
+            ->withWeek($week)
+            ->withDataWeekly($data_weekly)
+            ->withDataMonthly($data_monthly);
 
     }
 }

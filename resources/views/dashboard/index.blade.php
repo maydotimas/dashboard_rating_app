@@ -326,32 +326,55 @@ The above copyright notice and this permission notice shall be included in all c
                 <div class="col-md-1"></div>
             </div>
             <div class="row">
-                <div class="col-md-12">
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead class=" text-primary">
-                            <tr>
-                                <th> Name</th>
-                                <th> Country</th>
-                                <th> City</th>
-                                <th class="text-right"> Salary</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td> Dakota Rice</td>
-                                <td> Niger</td>
-                                <td> Oud-Turnhout</td>
-                                <td class="text-right"> $36,738</td>
-                            </tr>
-                            <tr>
-                                <td> Minerva Hooper</td>
-                                <td> Curaçao</td>
-                                <td> Sinaai-Waas</td>
-                                <td class="text-right"> $23,789</td>
-                            </tr>
-                            .....
-                        </table>
+                <div class="col-md-6">
+                    <div class="card card-chart">
+                        <div class="card-header">
+                            <h5 class="card-title">Last Week's Stat</h5>
+                            <p class="card-category">{{$week}} to {{date('Y-m-d')}}</p>
+                        </div>
+                        <div class="card-body">
+
+                            <div style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"
+                                 class="chartjs-size-monitor">
+                                <div class="chartjs-size-monitor-expand"
+                                     style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                    <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+                                </div>
+                                <div class="chartjs-size-monitor-shrink"
+                                     style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                    <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+                                </div>
+                            </div>
+                            <canvas id="chartWeek" style="display: block; width: 441px; height: 220px;" width="441"
+                                    height="220" class="chartjs-render-monitor"></canvas>
+                            <hr>
+                            <div class="row">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card card-chart">
+                        <div class="card-header">
+                            <h5 class="card-title">This Month's Stat</h5>
+                            <p class="card-category">{{date('F Y')}}</p>
+                        </div>
+                        <div class="card-body">
+                            <div style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"
+                                 class="chartjs-size-monitor">
+                                <div class="chartjs-size-monitor-expand"
+                                     style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                    <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+                                </div>
+                                <div class="chartjs-size-monitor-shrink"
+                                     style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                    <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+                                </div>
+                            </div>
+                            <canvas id="chartMonth" style="display: block; width: 441px; height: 220px;" width="441"
+                                    height="220" class="chartjs-render-monitor"></canvas>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -362,13 +385,7 @@ The above copyright notice and this permission notice shall be included in all c
                     <nav class="footer-nav">
                         <ul>
                             <li>
-                                <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a>
-                            </li>
-                            <li>
-                                <a href="http://blog.creative-tim.com/" target="_blank">Blog</a>
-                            </li>
-                            <li>
-                                <a href="https://www.creative-tim.com/license" target="_blank">Licenses</a>
+                                <a href="http://nexbridgetech.com/" target="_blank">NexBridgeTech</a>
                             </li>
                         </ul>
                     </nav>
@@ -404,6 +421,7 @@ The above copyright notice and this permission notice shall be included in all c
     $(document).ready(function () {
         // Javascript method's body can be found in assets-for-demo/js/demo.js
         demo.initChartsPages();
+        // demo.initChartsPages('chartWeek');
     });
 </script>
 </body>
