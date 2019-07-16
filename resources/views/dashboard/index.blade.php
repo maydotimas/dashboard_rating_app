@@ -439,9 +439,8 @@ The above copyright notice and this permission notice shall be included in all c
 
     $(document).ready(function () {
 
-        // display push.js message with you have # new reactions
-        Push.Permission.request();
-        
+
+
         /* Chart Data */
         var weekly =
                 {!! json_encode($data_weekly) !!}
@@ -495,6 +494,8 @@ The above copyright notice and this permission notice shall be included in all c
                 }, function (data) {
                 // check if there are returned data
                     if(data[0].length>0){
+                        // display push.js message with you have # new reactions
+                        Push.Permission.request();
                         // check the structure
                         var result = data[0];
                         var index = 0;
