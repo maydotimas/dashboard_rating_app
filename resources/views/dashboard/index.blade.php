@@ -419,24 +419,49 @@ The above copyright notice and this permission notice shall be included in all c
 <script src="/theme/js/paper-dashboard.min.js?v=2.0.0" type="text/javascript"></script>
 <!-- Paper Dashboard DEMO methods, don't include it in your project! -->
 <script src="/theme/demo/demo.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+
 <script>
+    var socket = io.connect('https://localhost:3000/');
+    // console.log(socket);
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                users: []
+            }
+        },
+        mounted: function (data) {
+            socket.on('test-channel:UserReacted', function (data) {
+                console.log(data);
+                alert('caught!');
+            });
+        }
+    });
+
     $(document).ready(function () {
         // Javascript method's body can be found in assets-for-demo/js/demo.js
         // demo.initChartsPages();
         // demo.initChartsPages('chartWeek');
-        var weekly = {!! json_encode($data_weekly) !!}
-        var weekly_label = {!! json_encode($weekly) !!}
+        var weekly =
+                {!! json_encode($data_weekly) !!}
+        var weekly_label =
+                {!! json_encode($weekly) !!}
         var weekly_label = Object.keys(weekly_label);
         var weekly_chart = "Weekly Reaction Statistics";
 
-        var monthly = {!! json_encode($data_monthly) !!}
-        var monthly_label = {!! json_encode($data_monthly) !!}
+        var monthly =
+                {!! json_encode($data_monthly) !!}
+        var monthly_label =
+                {!! json_encode($data_monthly) !!}
         var monthly_label = Object.keys(monthly_label);
         var monthly_chart = "Monthly Reaction Statistics";
         console.log(monthly);
         console.log(monthly_label);
-        demo.displayChartsWeeklyDashboard(weekly_label, weekly, weekly_chart,'chartWeek');
-        demo.displayChartsMonthlyDashboard(monthly_label, monthly, monthly_chart,'chartMonth');
+        demo.displayChartsWeeklyDashboard(weekly_label, weekly, weekly_chart, 'chartWeek');
+        demo.displayChartsMonthlyDashboard(monthly_label, monthly, monthly_chart, 'chartMonth');
 
     });
 </script>
