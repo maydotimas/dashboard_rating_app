@@ -142,28 +142,27 @@ The above copyright notice and this permission notice shall be included in all c
                             <div class="row">
                                 <div class="col-12 col-md-12">
                                     <div class="icon-big text-center icon-warning">
-                                        <i class="nc-icon nc-globe text-warning"></i>
+                                        <img src="/chat.png">
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-12">
+                                <div class="col-12 col-md-12 p-2">
                                     <div class="numbers  text-center">
                                         <p class="card-category text-center">Total</p>
-                                        <p class="card-title  text-center">
+                                        <p class="card-title  text-center" id="p_total">
                                             @if(isset($data['total']))
                                                 {{$data['total']}}
                                             @else
                                                 0
-                                        @endif
+                                            @endif
                                         <p>
+                                            <input type="hidden" id="hdn_total" value="{{$data['total']}}">
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="card-footer ">
                             <hr>
-                            <div class="stats">
-                                <i class="fa fa-refresh"></i> Update Now
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -173,28 +172,27 @@ The above copyright notice and this permission notice shall be included in all c
                             <div class="row">
                                 <div class="col-12 col-md-12">
                                     <div class="icon-big text-center icon-warning">
-                                        <i class="nc-icon nc-satisfied text-info"></i>
+                                        <img src="/in-love.png">
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-12">
+                                <div class="col-12 col-md-12 p-2">
                                     <div class="numbers  text-center">
                                         <p class="card-category text-center">Very Good</p>
-                                        <p class="card-title  text-center">
+                                        <p class="card-title  text-center" id="p_VG">
                                             @if(isset($data['VG']))
                                                 {{$data['VG']}}
                                             @else
                                                 0
-                                        @endif
+                                            @endif
                                         <p>
+                                        <input type="hidden" id="hdn_VG" value="{{$data['VG']}}">
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="card-footer ">
                             <hr>
-                            <div class="stats">
-                                <i class="fa fa-refresh"></i> Update Now
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -204,28 +202,27 @@ The above copyright notice and this permission notice shall be included in all c
                             <div class="row">
                                 <div class="col-12 col-md-12">
                                     <div class="icon-big text-center icon-warning">
-                                        <i class="far fa-smile text-success"></i>
+                                        <img src="/happy.png">
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-12">
+                                <div class="col-12 col-md-12 p-2">
                                     <div class="numbers  text-center">
                                         <p class="card-category text-center">Good</p>
-                                        <p class="card-title text-center">
+                                        <p class="card-title text-center" id="p_G">
                                             @if(isset($data['G']))
                                                 {{$data['G']}}
                                             @else
                                                 0
-                                        @endif
+                                            @endif
                                         <p>
+                                        <input type="hidden" id="hdn_G" value="{{$data['G']}}">
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="card-footer ">
                             <hr>
-                            <div class="stats">
-                                <i class="fa fa-refresh"></i> Update Now
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -235,28 +232,27 @@ The above copyright notice and this permission notice shall be included in all c
                             <div class="row">
                                 <div class="col-12 col-md-12">
                                     <div class="icon-big text-center icon-warning">
-                                        <i class="nc-icon nc-globe text-secondary"></i>
+                                        <img src="/smiling.png">
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-12">
+                                <div class="col-12 col-md-12 p-2">
                                     <div class="numbers  text-center">
                                         <p class="card-category text-center">Okay</p>
-                                        <p class="card-title  text-center">
+                                        <p class="card-title  text-center" id="p_O">
                                             @if(isset($data['O']))
                                                 {{$data['O']}}
                                             @else
                                                 0
-                                        @endif
+                                            @endif
                                         <p>
+                                        <input type="hidden" id="hdn_O" value="{{$data['O']}}">
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="card-footer ">
                             <hr>
-                            <div class="stats">
-                                <i class="fa fa-refresh"></i> Update Now
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -266,28 +262,27 @@ The above copyright notice and this permission notice shall be included in all c
                             <div class="row">
                                 <div class="col-12 col-md-12">
                                     <div class="icon-big text-center icon-warning">
-                                        <i class="far fa-angry text-warning"></i>
+                                        <img src="/mad.png">
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-12">
+                                <div class="col-12 col-md-12 p-2">
                                     <div class="numbers  text-center">
                                         <p class="card-category text-center">Poor</p>
-                                        <p class="card-title  text-center">
+                                        <p class="card-title  text-center" id="p_P">
                                             @if(isset($data['P']))
                                                 {{$data['P']}}
                                             @else
                                                 0
-                                        @endif
+                                            @endif
                                         <p>
+                                        <input type="hidden" id="hdn_P" value="{{$data['P']}}">
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="card-footer ">
                             <hr>
-                            <div class="stats">
-                                <i class="fa fa-refresh"></i> Update Now
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -297,28 +292,27 @@ The above copyright notice and this permission notice shall be included in all c
                             <div class="row">
                                 <div class="col-12 col-md-12">
                                     <div class="icon-big text-center icon-warning">
-                                        <i class="far fa-tired text-danger"></i>
+                                        <img src="/angry.png">
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-12">
+                                <div class="col-12 col-md-12 p-2">
                                     <div class="numbers  text-center">
                                         <p class="card-category text-center">Very Poor</p>
-                                        <p class="card-title  text-center">
+                                        <p class="card-title  text-center" id="p_VP">
                                             @if(isset($data['VP']))
                                                 {{$data['VP']}}
                                             @else
                                                 0
-                                        @endif
+                                            @endif
                                         <p>
+                                        <input type="hidden" id="hdn_VP" value="{{$data['VP']}}">
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="card-footer ">
                             <hr>
-                            <div class="stats">
-                                <i class="fa fa-refresh"></i> Update Now
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -403,6 +397,7 @@ The above copyright notice and this permission notice shall be included in all c
             </div>
         </footer>
     </div>
+
 </div>
 <!--   Core JS Files   -->
 <script src="/theme/js/core/jquery.min.js"></script>
@@ -410,7 +405,7 @@ The above copyright notice and this permission notice shall be included in all c
 <script src="/theme/js/core/bootstrap.min.js"></script>
 <script src="/theme/js/plugins/perfect-scrollbar.jquery.min.js"></script>
 <!--  Google Maps Plugin    -->
-<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+{{--<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>--}}
 <!-- Chart JS -->
 <script src="/theme/js/plugins/chartjs.min.js"></script>
 <!--  Notifications Plugin    -->
@@ -422,30 +417,28 @@ The above copyright notice and this permission notice shall be included in all c
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/1.0.9/push.min.js"></script>
 
 <script>
-    io.set('origins', 'http://touchpoint-nodejs.nexbridgetech.com:13159');
-    var socket = io.connect('http://touchpoint-nodejs.nexbridgetech.com:13159');
-    // console.log(socket);
-    new Vue({
-        el: '#app',
-        data() {
-            return {
-                users: []
-            }
-        },
-        mounted: function (data) {
-            socket.on('test-channel:UserReacted', function (data) {
-                console.log(data);
-                alert('caught!');
-            });
-        }
-    });
+    /* var socket = io.connect('http://touchpoint-nodejs.nexbridgetech.com:13159');
+     // console.log(socket);
+     new Vue({
+         el: '#app',
+         data() {
+             return {
+                 users: []
+             }
+         },
+         mounted: function (data) {
+             socket.on('test-channel:UserReacted', function (data) {
+                 console.log(data);
+                 alert('caught!');
+             });
+         }
+     });*/
 
     $(document).ready(function () {
-        // Javascript method's body can be found in assets-for-demo/js/demo.js
-        // demo.initChartsPages();
-        // demo.initChartsPages('chartWeek');
+        /* Chart Data */
         var weekly =
                 {!! json_encode($data_weekly) !!}
         var weekly_label =
@@ -459,10 +452,174 @@ The above copyright notice and this permission notice shall be included in all c
                 {!! json_encode($data_monthly) !!}
         var monthly_label = Object.keys(monthly_label);
         var monthly_chart = "Monthly Reaction Statistics";
-        console.log(monthly);
-        console.log(monthly_label);
+
         demo.displayChartsWeeklyDashboard(weekly_label, weekly, weekly_chart, 'chartWeek');
         demo.displayChartsMonthlyDashboard(monthly_label, monthly, monthly_chart, 'chartMonth');
+
+        /* Push Notif kuno hahahah duga pa more! */
+        var max_id = {!! json_encode($max_id) !!}
+
+                // check if existing
+        var id = localStorage.getItem("id");
+        if(id == null){
+            localStorage.setItem("id", max_id);
+        }
+
+
+        function checkUpdate() {
+            // get the current value
+            var vg = $("#hdn_VG").val();
+            var g = $("#hdn_G").val();
+            var o = $("#hdn_O").val();
+            var p = $("#hdn_P").val();
+            var vp = $("#hdn_VP").val();
+            var total = $("#hdn_total").val();
+
+            var tmp_vg = vg;
+            var tmp_g = g;
+            var tmp_o = o;
+            var tmp_p = p;
+            var tmp_vp = vp;
+
+            // get last viewed id
+            var id = localStorage.getItem("id");
+
+            // update the local storage last id viewed
+            $.get("/get-updates",
+                {
+                    _id: id
+                }, function (data) {
+                // check if there are returned data
+                    if(data[0].length>0){
+                        // check the structure
+                        var result = data[0];
+                        var index = 0;
+                        for(index=0;index<result.length;index++){
+                            // increment counts for each reaction
+                            if(result[index].reaction=='VG'){
+                                tmp_vg++;
+                                total++;
+                            }else if(result[index].reaction=='G'){
+                                tmp_g++;
+                                total++;
+                            }else if(result[index].reaction=='O'){
+                                tmp_o++;
+                                total++;
+                            }else if(result[index].reaction=='P'){
+                                tmp_p++;
+                                total++;
+                            }else if(result[index].reaction=='VP'){
+                                tmp_vp++;
+                                total++;
+                            }else{
+                                ;// do nothing
+                            }
+                        }
+
+                        // check if each reaction has changed
+                        if(tmp_vg != vg){
+                            // display notification
+                            Push.create("New Reactions!", {
+                                body: "You have "+(tmp_vg-vg)+" new VG reactions",
+                                icon: "/in-love.png",
+                                timeout: 5000,
+                                onClick: function () {
+                                    console.log(this);
+                                }
+                            });
+
+                            // update value and display
+                            $("#hdn_VG").val(tmp_vg);
+                            // p_VP
+                            $("#p_VG").html(tmp_vg);
+                        }
+                        if(tmp_g != g){
+                            // display notification
+                            Push.create("New Reactions!", {
+                                body: "You have "+(tmp_g-g)+" new Very Good reactions",
+                                icon: "/happy.png",
+                                timeout: 5000,
+                                onClick: function () {
+                                    console.log(this);
+                                }
+                            });
+
+                            $("#hdn_G").val(tmp_g);
+                            // p_VP
+                            $("#p_G").html(tmp_g);
+
+                        }
+                        if(tmp_o != o){
+                            // display notification
+                            Push.create("New Reactions!", {
+                                body: "You have "+(tmp_o-o)+" new OK reactions",
+                                icon: "/smiling.png",
+                                timeout: 5000,
+                                onClick: function () {
+                                    console.log(this);
+                                }
+                            });
+
+                            $("#hdn_O").val(tmp_o);
+                            // p_VP
+                            $("#p_O").html(tmp_o);
+                        }
+                        if(tmp_p != p){
+                            // display notification
+                            Push.create("New Reactions!", {
+                                body: "You have "+(tmp_p-p)+" new Poor reactions",
+                                icon: "/mad.png",
+                                timeout: 5000,
+                                onClick: function () {
+                                    console.log(this);
+                                }
+                            });
+
+                            $("#hdn_P").val(tmp_p);
+                            // p_VP
+                            $("#p_P").html(tmp_p);
+                        }
+                        if(tmp_vp != vp){
+                            // display notification
+                            Push.create("New Reactions!", {
+                                body: "You have "+(tmp_vp-vp)+" new Very Poor reactions",
+                                icon: "/angry.png",
+                                timeout: 5000,
+                                onClick: function () {
+                                    console.log(this);
+                                }
+                            });
+
+                            $("#hdn_VP").val(tmp_vp);
+                            // p_VP
+                            $("#p_VP").html(tmp_vp);
+                        }
+                        // update total display
+                        $("#hdn_total").val(total);
+                        // p_VP
+                        $("#p_total").html(total);
+
+                        // get the last notifications last 1 hour and send the last id viewed
+                        localStorage.setItem("id", data[1]);
+
+                        // display push.js message with you have # new reactions
+                        Push.Permission.request();
+
+                    }
+
+                    setTimeout(function () {
+                        checkUpdate();
+                        Push.clear();
+                    }, 3000);
+
+                }, "json");
+
+
+
+
+        }
+
+        checkUpdate();
 
     });
 </script>

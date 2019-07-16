@@ -45,15 +45,43 @@ class ReactionController extends Controller
         $week = date('Y-m-d', strtotime('-7 day', strtotime(date('Y-m-d'))));
 
         $weekly = $this->get_reactions(true, $week, date('Y-m-d'));
-        $monthly = $this->get_reactions(true, date('Y-m-01'), date('Y-m-d'),'monthly');
+        $monthly = $this->get_reactions(true, date('Y-m-01'), date('Y-m-d'), 'monthly');
+
+
 
         return view('dashboard.index')
             ->withData($daily)
-            ->withWeek($week)
-            ->withDataWeekly($weekly[0])
-            ->withWeekly($weekly[1])
-            ->withDataMonthly($monthly[0])
-            ->withMonthly($monthly[1]);
+            ->with('max_id',$this->get_max_id() )
+            ->with('week', $week)
+            ->with('data_weekly', $weekly[0])
+            ->with('weekly', $weekly[1])
+            ->with('data_monthly', $monthly[0])
+            ->with('monthly', $monthly[1]);
+
+    }
+
+    public function get_max_id(){
+        // get max id
+        $max_id = Reaction::orderBy('id', 'DESC')
+            ->limit(1)
+            ->get();
+
+        if (!$max_id) {
+            $max_id= 0;
+        }else{
+            $max_id = $max_id[0]->id;
+        }
+
+        return $max_id;
+    }
+
+    public function get_updates(Request $request)
+    {
+        $data = Reaction::where('id', '>', $request->_id)
+            ->orderBy('id', 'DESC')
+            ->get();
+
+        return [$data,$this->get_max_id()];
 
     }
 

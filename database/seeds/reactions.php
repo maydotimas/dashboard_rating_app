@@ -20,7 +20,7 @@ class reactions extends Seeder
                 'mobile_id'     => $faker->numberBetween(1,1000),
                 'lat'     => $faker->numberBetween(1,1000),
                 'long'     => $faker->numberBetween(1,1000),
-                'reaction'    => $faker->randomElement(['VG','G','O','VP']),
+                'reaction'    => $faker->randomElement(['VG','G','O','VP','P']),
                 'created_at' => $faker->dateTimeBetween('-1 month','+1 month'),
             ]);
         }

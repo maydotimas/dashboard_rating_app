@@ -21,3 +21,4 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'ReactionController@show_dashboard')->name('home');
+Route::get('/get-updates', 'ReactionController@get_updates')->name('get-updates');
