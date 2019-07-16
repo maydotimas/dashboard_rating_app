@@ -153,7 +153,7 @@ The above copyright notice and this permission notice shall be included in all c
                                                 {{$data['total']}}
                                             @else
                                                 0
-                                            @endif
+                                        @endif
                                         <p>
                                             <input type="hidden" id="hdn_total" value="{{$data['total']}}">
                                     </div>
@@ -183,9 +183,9 @@ The above copyright notice and this permission notice shall be included in all c
                                                 {{$data['VG']}}
                                             @else
                                                 0
-                                            @endif
+                                        @endif
                                         <p>
-                                        <input type="hidden" id="hdn_VG" value="{{$data['VG']}}">
+                                            <input type="hidden" id="hdn_VG" value="{{$data['VG']}}">
                                     </div>
                                 </div>
                             </div>
@@ -213,9 +213,9 @@ The above copyright notice and this permission notice shall be included in all c
                                                 {{$data['G']}}
                                             @else
                                                 0
-                                            @endif
+                                        @endif
                                         <p>
-                                        <input type="hidden" id="hdn_G" value="{{$data['G']}}">
+                                            <input type="hidden" id="hdn_G" value="{{$data['G']}}">
                                     </div>
                                 </div>
                             </div>
@@ -243,9 +243,9 @@ The above copyright notice and this permission notice shall be included in all c
                                                 {{$data['O']}}
                                             @else
                                                 0
-                                            @endif
+                                        @endif
                                         <p>
-                                        <input type="hidden" id="hdn_O" value="{{$data['O']}}">
+                                            <input type="hidden" id="hdn_O" value="{{$data['O']}}">
                                     </div>
                                 </div>
                             </div>
@@ -273,9 +273,9 @@ The above copyright notice and this permission notice shall be included in all c
                                                 {{$data['P']}}
                                             @else
                                                 0
-                                            @endif
+                                        @endif
                                         <p>
-                                        <input type="hidden" id="hdn_P" value="{{$data['P']}}">
+                                            <input type="hidden" id="hdn_P" value="{{$data['P']}}">
                                     </div>
                                 </div>
                             </div>
@@ -303,9 +303,9 @@ The above copyright notice and this permission notice shall be included in all c
                                                 {{$data['VP']}}
                                             @else
                                                 0
-                                            @endif
+                                        @endif
                                         <p>
-                                        <input type="hidden" id="hdn_VP" value="{{$data['VP']}}">
+                                            <input type="hidden" id="hdn_VP" value="{{$data['VP']}}">
                                     </div>
                                 </div>
                             </div>
@@ -440,7 +440,6 @@ The above copyright notice and this permission notice shall be included in all c
     $(document).ready(function () {
 
 
-
         /* Chart Data */
         var weekly =
                 {!! json_encode($data_weekly) !!}
@@ -460,11 +459,26 @@ The above copyright notice and this permission notice shall be included in all c
         demo.displayChartsMonthlyDashboard(monthly_label, monthly, monthly_chart, 'chartMonth');
 
         /* Push Notif kuno hahahah duga pa more! */
+
+        function notifyMe() {
+            if (!("Notification" in window)) {
+                alert("This browser does not support desktop notification");
+            } else if (Notification.permission !== 'denied') {
+                Notification.requestPermission(function (permission) {
+                    if (!('permission' in Notification)) {
+                        Notification.permission = permission;
+                    }
+                });
+            }
+        }
+
+        notifyMe();
+
         var max_id = {!! json_encode($max_id) !!}
 
-                // check if existing
+        // check if existing
         var id = localStorage.getItem("id");
-        if(id == null){
+        if (id == null) {
             localStorage.setItem("id", max_id);
         }
 
@@ -492,108 +506,100 @@ The above copyright notice and this permission notice shall be included in all c
                 {
                     _id: id
                 }, function (data) {
-                // check if there are returned data
-                    if(data[0].length>0){
+                    // check if there are returned data
+                    if (data[0].length > 0) {
                         // display push.js message with you have # new reactions
-                        Push.Permission.request();
+                        // Push.Permission.request();
                         // check the structure
                         var result = data[0];
                         var index = 0;
-                        for(index=0;index<result.length;index++){
+                        for (index = 0; index < result.length; index++) {
                             // increment counts for each reaction
-                            if(result[index].reaction=='VG'){
+                            if (result[index].reaction == 'VG') {
                                 tmp_vg++;
                                 total++;
-                            }else if(result[index].reaction=='G'){
+                            } else if (result[index].reaction == 'G') {
                                 tmp_g++;
                                 total++;
-                            }else if(result[index].reaction=='O'){
+                            } else if (result[index].reaction == 'O') {
                                 tmp_o++;
                                 total++;
-                            }else if(result[index].reaction=='P'){
+                            } else if (result[index].reaction == 'P') {
                                 tmp_p++;
                                 total++;
-                            }else if(result[index].reaction=='VP'){
+                            } else if (result[index].reaction == 'VP') {
                                 tmp_vp++;
                                 total++;
-                            }else{
+                            } else {
                                 ;// do nothing
                             }
                         }
 
                         // check if each reaction has changed
-                        if(tmp_vg != vg){
-                            // display notification
-                            Push.create("New Reactions!", {
-                                body: "You have "+(tmp_vg-vg)+" new VG reactions",
+                        if (tmp_vg != vg) {
+
+                            var options = {
+                                body: "You have " + (tmp_vg - vg) + " new VG reactions",
                                 icon: "/in-love.png",
-                                timeout: 5000,
-                                onClick: function () {
-                                    console.log(this);
-                                }
-                            });
+                                dir: "ltr"
+                            };
+                            var notification = new Notification("Good Job!", options);
 
                             // update value and display
                             $("#hdn_VG").val(tmp_vg);
                             // p_VP
                             $("#p_VG").html(tmp_vg);
                         }
-                        if(tmp_g != g){
+                        if (tmp_g != g) {
                             // display notification
-                            Push.create("New Reactions!", {
-                                body: "You have "+(tmp_g-g)+" new Very Good reactions",
+                            var options = {
+                                body: "You have " + (tmp_g - g) + " new Very Good reactions",
                                 icon: "/happy.png",
-                                timeout: 5000,
-                                onClick: function () {
-                                    console.log(this);
-                                }
-                            });
+                                dir: "ltr"
+                            };
+                            var notification = new Notification("Yes! ", options);
 
                             $("#hdn_G").val(tmp_g);
                             // p_VP
                             $("#p_G").html(tmp_g);
 
                         }
-                        if(tmp_o != o){
+                        if (tmp_o != o) {
                             // display notification
-                            Push.create("New Reactions!", {
-                                body: "You have "+(tmp_o-o)+" new OK reactions",
+                            var options = {
+                                body: "You have " + (tmp_o - o) + " new OK reactions",
                                 icon: "/smiling.png",
-                                timeout: 5000,
-                                onClick: function () {
-                                    console.log(this);
-                                }
-                            });
+                                dir: "ltr"
+                            };
+                            var notification = new Notification("Hi there", options);
 
                             $("#hdn_O").val(tmp_o);
                             // p_VP
                             $("#p_O").html(tmp_o);
                         }
-                        if(tmp_p != p){
+                        if (tmp_p != p) {
                             // display notification
-                            Push.create("New Reactions!", {
-                                body: "You have "+(tmp_p-p)+" new Poor reactions",
+                            var options = {
+                                body: "You have " + (tmp_p - p) + " new Poor reactions",
                                 icon: "/mad.png",
-                                timeout: 5000,
-                                onClick: function () {
-                                    console.log(this);
-                                }
-                            });
+                                dir: "ltr"
+                            };
+                            var notification = new Notification("Oh no :(", options);
 
                             $("#hdn_P").val(tmp_p);
                             // p_VP
                             $("#p_P").html(tmp_p);
                         }
-                        if(tmp_vp != vp){
+                        if (tmp_vp != vp) {
+
                             // display notification
-                            Push.create("New Reactions!", {
-                                body: "You have "+(tmp_vp-vp)+" new Very Poor reactions",
+                            var options = {
+                                body: "You have " + (tmp_vp - vp) + " new Very Poor reactions",
                                 icon: "/angry.png",
-                                timeout: 5000,
-                                onClick: function () {
-                                    console.log(this);
-                                }
-                            });
+                                dir: "ltr"
+                            };
+                            var notification = new Notification("Uh Oh!", options);
+
 
                             $("#hdn_VP").val(tmp_vp);
                             // p_VP
@@ -608,17 +614,13 @@ The above copyright notice and this permission notice shall be included in all c
                         localStorage.setItem("id", data[1]);
 
 
-
                     }
 
                     setTimeout(function () {
                         checkUpdate();
-                        Push.clear();
                     }, 3000);
 
                 }, "json");
-
-
 
 
         }
