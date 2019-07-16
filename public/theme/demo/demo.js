@@ -97,22 +97,70 @@ demo = {
     initChartsPages: function (id) {
         chartColor = "#FFFFFF";
 
+
+        ctx = document.getElementById('chartWeek').getContext("2d");
+
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Very Good', 'Good', 'OK', 'Poor', 'Very Poor'],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [12, 19, 3, 5, 2, 3],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                },
+                title: {
+                    display: true,
+                    text: 'Custom Chart Title'
+                }
+            }
+        });
+
         ctx = document.getElementById('chartMonth').getContext("2d");
+
 
         myChart = new Chart(ctx, {
             type: 'line',
 
             data: {
-                labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct"],
-                datasets: [{
-                    borderColor: "#6bd098",
-                    backgroundColor: "#6bd098",
-                    pointRadius: 0,
-                    pointHoverRadius: 0,
-                    borderWidth: 3,
-                    data: [300, 310, 316, 322, 330, 326, 333, 345, 338, 354]
-                },
+                labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct",],
+                datasets: [
                     {
+                        label: 'VG',
+                        borderColor: "#6bd098",
+                        backgroundColor: "#6bd098",
+                        pointRadius: 1,
+                        pointHoverRadius: 1,
+                        borderWidth: 3,
+                        data: [300, 310, 316, 322, 330, 326, 333, 345, 338, 354]
+                    },
+                    {
+                        label: 'G',
                         borderColor: "#f17e5d",
                         backgroundColor: "#f17e5d",
                         pointRadius: 0,
@@ -121,6 +169,25 @@ demo = {
                         data: [320, 340, 365, 360, 370, 385, 390, 384, 408, 420]
                     },
                     {
+                        label: 'O',
+                        borderColor: "#fcc468",
+                        backgroundColor: "#fcc468",
+                        pointRadius: 0,
+                        pointHoverRadius: 0,
+                        borderWidth: 3,
+                        data: [370, 394, 415, 409, 425, 445, 460, 450, 478, 484]
+                    },
+                    {
+                        label: 'P',
+                        borderColor: "#fcc468",
+                        backgroundColor: "#fcc468",
+                        pointRadius: 0,
+                        pointHoverRadius: 0,
+                        borderWidth: 3,
+                        data: [370, 394, 415, 409, 425, 445, 460, 450, 478, 484]
+                    },
+                    {
+                        label: 'VP',
                         borderColor: "#fcc468",
                         backgroundColor: "#fcc468",
                         pointRadius: 0,
@@ -132,11 +199,11 @@ demo = {
             },
             options: {
                 legend: {
-                    display: false
+                    display: true
                 },
 
                 tooltips: {
-                    enabled: false
+                    enabled: true
                 },
 
                 scales: {
@@ -144,12 +211,12 @@ demo = {
 
                         ticks: {
                             fontColor: "#9f9f9f",
-                            beginAtZero: false,
+                            beginAtZero: true,
                             maxTicksLimit: 5,
                             //padding: 20
                         },
                         gridLines: {
-                            drawBorder: false,
+                            drawBorder: true,
                             zeroLineColor: "#ccc",
                             color: 'rgba(255,255,255,0.05)'
                         }
@@ -170,12 +237,16 @@ demo = {
                         }
                     }]
                 },
+                title: {
+                    display: true,
+                    text: 'Custom Chart Title'
+                }
             }
         });
 
         chartColor = "#FFFFFF";
 
-        ctx = document.getElementById('chartWeek').getContext("2d");
+        ctx = document.getElementById('chartWeeks').getContext("2d");
 
         myChart = new Chart(ctx, {
             type: 'line',

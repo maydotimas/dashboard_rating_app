@@ -42,19 +42,18 @@ class ReactionController extends Controller
         $daily = $this->get_reactions();
 
         // weekly reactions
-        $date = date('Y-m-d');
-        $newdate = strtotime('-7 day', strtotime($date));
-        $newdate = date('Y-m-d', $newdate);
-        $week = $newdate;
+        $week = date('Y-m-d', strtotime('-7 day', strtotime(date('Y-m-d'))));
 
-        $weekly = $this->get_reactions(true,$newdate,date('Y-m-d'));
-        $monthly = $this->get_reactions(true,date('Y-m-01'),date('Y-m-d'));
+        $weekly = $this->get_reactions(true, $week, date('Y-m-d'));
+        $monthly = $this->get_reactions(true, date('Y-m-01'), date('Y-m-d'));
 
         return view('dashboard.index')
             ->withData($daily)
             ->withWeek($week)
-            ->withDataWeekly($weekly)
-            ->withDataMonthly($monthly);
+            ->withDataWeekly($weekly[0])
+            ->withWeekly($weekly[1])
+            ->withDataMonthly($monthly[0])
+            ->withMonthly($monthly[1]);
 
     }
 
@@ -69,10 +68,16 @@ class ReactionController extends Controller
 
             $data = [];
             $data['total'] = 0;
+            $data['VG'] = 0;
+            $data['G'] = 0;
+            $data['O'] = 0;
+            $data['P'] = 0;
+            $data['VP'] = 0;
             foreach ($reactions as $reaction) {
                 $data[$reaction->reaction] = $reaction->reaction_count;
                 $data['total'] += $reaction->reaction_count;
             }
+            return $data;
 
         } else {
             $reactions = Reaction::whereBetween(DB::raw('date(created_at)'), [$date_from, $date_to])
@@ -82,14 +87,22 @@ class ReactionController extends Controller
 
 
             $data = [];
-            $data['total'] = 0;
+            $react_date = [];
             foreach ($reactions as $reaction) {
-                $data[$reaction->date_react][$reaction->reaction] = $reaction->reaction_count;
-                $data['total'] += $reaction->reaction_count;
+                $data['VG'][$reaction->date_react] = 0;
+                $data['G'][$reaction->date_react] = 0;
+                $data['O'][$reaction->date_react] = 0;
+                $data['P'][$reaction->date_react] = 0;
+                $data['VP'][$reaction->date_react] = 0;
+            }
+
+            foreach ($reactions as $reaction) {
+                $data[$reaction->reaction][$reaction->date_react] = $reaction->reaction_count;
+                $react_date[$reaction->date_react] = $reaction->date_react;
             }
         }
 
-        return $data;
+        return [$data, $react_date];
 
     }
 }
