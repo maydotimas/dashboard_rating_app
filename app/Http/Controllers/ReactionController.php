@@ -10,7 +10,8 @@ use Illuminate\Support\Facades\Redis;
 
 class ReactionController extends Controller
 {
-    public function api_store_reaction(ApiStoreReactionRequest $request){
+    public function api_store_reaction(ApiStoreReactionRequest $request)
+    {
         /* send data */
         $data = [
             'event' => 'UserReacted',
@@ -28,63 +29,67 @@ class ReactionController extends Controller
         $reaction->save();
 
         return response()->json([
-            'success'=>true,
-            'message'=>'Reaction has been submitted',
-            'data'=>$reaction
+            'success' => true,
+            'message' => 'Reaction has been submitted',
+            'data' => $reaction
         ]);
     }
 
-    public function show_dashboard(){
+    public function show_dashboard()
+    {
 
         //daily reactions
-        $reactions = Reaction::where(DB::raw('date(created_at)'),date('Y-m-d'))
-            ->select(DB::raw('count(*) as reaction_count'),'reaction')
-            ->groupBy('reaction')
-            ->get();
-
-        $data = [];
-        $data['total'] = 0;
-        foreach($reactions as $reaction){
-            $data[$reaction->reaction] = $reaction->reaction_count;
-            $data['total'] += $reaction->reaction_count;
-        }
+        $daily = $this->get_reactions();
 
         // weekly reactions
         $date = date('Y-m-d');
-        $newdate = strtotime ( '-7 day' , strtotime ( $date ) ) ;
-        $newdate = date ( 'Y-m-d' , $newdate );
+        $newdate = strtotime('-7 day', strtotime($date));
+        $newdate = date('Y-m-d', $newdate);
         $week = $newdate;
 
-        $reactions_weekly = Reaction::whereBetween(DB::raw('date(created_at)'),[$newdate,date('Y-m-d')])
-            ->select(DB::raw('count(*) as reaction_count'),'reaction')
-            ->groupBy('reaction')
-            ->get();
-
-        $data_weekly = [];
-        $data_weekly['total'] = 0;
-        foreach($reactions_weekly as $reaction){
-            $data_weekly[$reaction->reaction] = $reaction->reaction_count;
-            $data_weekly['total'] += $reaction->reaction_count;
-        }
-
-        //monthly reactions
-        $reactions_monthly = Reaction::whereBetween(DB::raw('date(created_at)'),[date('Y-m-01'),date('Y-m-d')])
-            ->select(DB::raw('count(*) as reaction_count'),'reaction')
-            ->groupBy('reaction')
-            ->get();
-
-        $data_monthly = [];
-        $data_monthly['total'] = 0;
-        foreach($reactions_monthly as $reaction){
-            $data_monthly[$reaction->reaction] = $reaction->reaction_count;
-            $data_monthly['total'] += $reaction->reaction_count;
-        }
+        $weekly = $this->get_reactions(true,$newdate,date('Y-m-d'));
+        $monthly = $this->get_reactions(true,date('Y-m-01'),date('Y-m-d'));
 
         return view('dashboard.index')
-            ->withData($data)
+            ->withData($daily)
             ->withWeek($week)
-            ->withDataWeekly($data_weekly)
-            ->withDataMonthly($data_monthly);
+            ->withDataWeekly($weekly)
+            ->withDataMonthly($monthly);
+
+    }
+
+    public function get_reactions($is_between = false, $date_from = null, $date_to = null)
+    {
+
+        if (!$is_between) {
+            $reactions = Reaction::where(DB::raw('date(created_at)'), date('Y-m-d'))
+                ->select(DB::raw('count(*) as reaction_count'), 'reaction')
+                ->groupBy('reaction')
+                ->get();
+
+            $data = [];
+            $data['total'] = 0;
+            foreach ($reactions as $reaction) {
+                $data[$reaction->reaction] = $reaction->reaction_count;
+                $data['total'] += $reaction->reaction_count;
+            }
+
+        } else {
+            $reactions = Reaction::whereBetween(DB::raw('date(created_at)'), [$date_from, $date_to])
+                ->select(DB::raw('count(*) as reaction_count'), 'reaction', DB::raw('date(created_at) as date_react'))
+                ->groupBy('date_react', 'reaction')
+                ->get();
+
+
+            $data = [];
+            $data['total'] = 0;
+            foreach ($reactions as $reaction) {
+                $data[$reaction->date_react][$reaction->reaction] = $reaction->reaction_count;
+                $data['total'] += $reaction->reaction_count;
+            }
+        }
+
+        return $data;
 
     }
 }

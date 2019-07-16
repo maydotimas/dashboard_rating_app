@@ -348,9 +348,6 @@ The above copyright notice and this permission notice shall be included in all c
                             <canvas id="chartWeek" style="display: block; width: 441px; height: 220px;" width="441"
                                     height="220" class="chartjs-render-monitor"></canvas>
                             <hr>
-                            <div class="row">
-
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -374,6 +371,10 @@ The above copyright notice and this permission notice shall be included in all c
                             </div>
                             <canvas id="chartMonth" style="display: block; width: 441px; height: 220px;" width="441"
                                     height="220" class="chartjs-render-monitor"></canvas>
+                            <hr>
+                            <div class="row">
+
+                            </div>
                         </div>
                     </div>
                 </div>
